@@ -5,13 +5,6 @@
 // panjang judul masing-masing kolom (ID | Judul | Direktor | Bahasa | Durasi | Tahun | Harga)
 int max_lens[] = {2, 5, 8, 6, 6, 5, 5};
 
-int cmax(int a, int b) {
-  if(a > b) {
-    return a;
-  }
-  return b;
-}
-
 int intlen(int num) {
   if(num < 10) {
     return 1;
