@@ -4,8 +4,8 @@
 
 class Movie {
   private:
-    std::string title, director, lang;
-    int minutes, year, price;
+    std::string title, director, lang; // Judul, Direktor, Bahasa
+    int minutes, year, price; // Durasi, Tahun rilis, Harga tiket
 
   public:
     Movie() {}

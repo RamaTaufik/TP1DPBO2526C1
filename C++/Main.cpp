@@ -2,9 +2,10 @@
 #include <cmath>
 
 // Panjang maksimum dari setiap atribut milik semua objek. Secara default, maksimum nya di-set terlebih dahulu pada
-// panjang judul masing-masing kolom (ID | Judul | Direktor | Bahasa | Durasi | Tahun | Harga)
+// panjang nama masing-masing atribut (ID | Judul | Direktor | Bahasa | Durasi | Tahun | Harga)
 int max_lens[] = {2, 5, 8, 6, 6, 5, 5};
 
+// Fungsi untuk menghitung jumlah digit suatu integer positif
 int intlen(int num) {
   if(num < 10) {
     return 1;
@@ -12,11 +13,14 @@ int intlen(int num) {
   return intlen(num / 10) + 1;
 }
 
+// Fungsi untuk merubah string menjadi integer
 int cstrtoint(std::string str) {
   int num = 0;
 
   for(int i = 0; i < str.size(); i++) {
     if(str[i] < '0' || str[i] > '9') {
+      // Karena semua atribut integer dipastikan hanya bilangan bulat positif, maka hanya digit berupa angka 0 sampai 9
+      // yang akan diterima, sehingga fungsi ini juga sekaligus menjadi filter input
       return -1;
     } else {
       num = (num * 10) + (str[i] - '0');
@@ -26,11 +30,13 @@ int cstrtoint(std::string str) {
   return num;
 }
 
+// Fungsi yang merubah keseluruhan string menjadi lowercase
 std::string strToLower(std::string str) {
   int i = 0;
   std::string new_str = str;
 
   while(i < str.size()) {
+    // Memastikan bahwa hanya karakter abjad romawi saja yang diubah ke lowercase
     if(new_str[i] >= 'A' && new_str[i] <= 'Z') new_str[i] += 32;
 
     i++;
@@ -39,12 +45,14 @@ std::string strToLower(std::string str) {
   return new_str;
 }
 
+// Prosedur untuk meng-print karakter c sebanyak n
 void printchar(int n, char c) {
   for(int i = 0; i < n; i++) {
     std::cout << c;
   }
 }
 
+// Prosedur untuk meng-print border pada tabel di CLI
 void printborder() {
   for(int i = 0; i < 7; i++) {
     std::cout << "+";
@@ -53,7 +61,9 @@ void printborder() {
   std::cout << "+\n";
 }
 
+// Prosedur untuk meng-print data film ke bentuk tabel
 void printMovies(std::vector<Movie> ms) {
+  // Print header tabel
   printborder();
   std::cout << "| ID";
   printchar(max_lens[0] - 2, ' ');
@@ -73,6 +83,7 @@ void printMovies(std::vector<Movie> ms) {
   printborder();
 
   for(int i = 0; i < ms.size(); i++) {
+    // Print masing-masing data
     std::cout << "| ";
     printchar(max_lens[0] - intlen(i + 1), ' ');
     std::cout << (i + 1) << " | " << ms[i].getTitle();
@@ -85,14 +96,14 @@ void printMovies(std::vector<Movie> ms) {
     printchar(max_lens[3] - ms[i].getLang().size(), ' ');
 
     std::cout << " | ";
-    printchar(max_lens[4] - 1 - intlen(ms[i].getMinutes()), ' ');
+    printchar(max_lens[4] - 1 - intlen(ms[i].getMinutes()), ' '); // Dikurangi satu karena ada penambahan 'm'
     std::cout << ms[i].getMinutes() << "m";
 
     std::cout << " | " << ms[i].getYear();
     printchar(max_lens[5] - intlen(ms[i].getYear()), ' ');
 
     std::cout << " | Rp";
-    printchar(max_lens[6] - 2 - intlen(ms[i].getPrice()), ' ');
+    printchar(max_lens[6] - 2 - intlen(ms[i].getPrice()), ' '); // Dikurangi dua karena ada penambahan 'Rp'
     std::cout << ms[i].getPrice() << " |\n";
 
     printborder();
@@ -100,9 +111,10 @@ void printMovies(std::vector<Movie> ms) {
 }
 
 int main() {
-  std::vector<Movie> movies;
-  std::string choice = "0";
+  std::vector<Movie> movies; // Vector data film
+  std::string choice = "0"; // Variabel untuk input opsi
 
+  // Data dummy
   movies.push_back(Movie("Interstellar", "Christopher Nolan", "Inggris", 169, 2014, 30000));
   movies.push_back(Movie("Inception", "Christopher Nolan", "Inggris", 148, 2010, 35000));
   movies.push_back(Movie("Parasite", "Bong Joon-ho", "Korea", 132, 2019, 40000));
@@ -112,6 +124,7 @@ int main() {
   movies.push_back(Movie("Pengabdi Setan", "Joko Anwar", "Indonesia", 107, 2017, 30000));
   movies.push_back(Movie("Godzilla Minus One", "Takashi Yamazaki", "Jepang", 125, 2023, 40000));
 
+  // Perubahan panjang maksimum setiap atribut setelah penambahan data dummy
   max_lens[1] = 18;
   max_lens[2] = 17;
   max_lens[3] = 9;
@@ -123,12 +136,11 @@ int main() {
   std::cout << "  / __/ / / /  | / / / __/ /  |_/ / / / / /   / / / / / // /  /  __/ / __  / / /   / / / / /_  _/\n";
   std::cout << " / /_  / / / /||/ / / __/ / /|_/ / / /_/ /   / /_/ / / /_/ / /__  / / /_/ / / /_  / /_/ /   / /\n";
   std::cout << "/___/ /_/ /_/ |__/ /___/ /_/  /_/ /_/ /_/   /_/ /_/ /_____/ /____/ /_____/ /___/ /_____/   /_/\n";
-  // std::cout << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////\n";
-  // std::cout << "||   CINEMA ABSOLUT DATA CENTER   ||\n";
-  // std::cout << "//////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n";
   std::cout << "\n> CINEMA ABSOLUT DATA CENTER <";
   
+  // Loop utama
   do{
+    // Jika terjadi kesalahan dalam input opsi, tidak perlu print ulang pilihan opsi agar tidak memenuhi layar
     if(choice == "0" || choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5") {
       std::cout << "\n1. Lihat data film\n";
       std::cout << "2. Tambah data film baru\n";
@@ -142,35 +154,49 @@ int main() {
     std::cin >> choice;
 
     if(choice == "1") {
+      // Lihat semua data
       printMovies(movies);
     } else if(choice == "2") {
+      // Tambah data
       int temp_int, res = 0;
       std::string temp_str;
       Movie temp_movie;
 
       do{
         std::cout << "Masukkan judul film     : ";
+        // Ketika melakukan std::cin sebelumnya, ada sisa '\n' yang tidak terbawa ketika pengguna menekan Enter.
+        // Kode di bawah 'melahap' '\n' sisaan tersebut agar input tidak seolah-olah ter-'skip'. Validasi res == 0
+        // memastikan kode dibawah hanya dijalankan sekali karena jika berulang-ulang, juga akan seolah-olah ter-'skip'
         if(res == 0) std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::getline(std::cin, temp_str);
         res = temp_movie.setTitle(temp_str);
+        // Cek panjang maksimum atribut 'Judul'
         if(res == 0 && max_lens[1] < temp_movie.getTitle().size()) max_lens[1] = temp_movie.getTitle().size();
       } while(res != 0);
 
       std::cout << "Masukkan nama direktor  : ";
+      // Pemakaian std::getline konsekutif tidak perlu 'melahap' '\n' lagi
       std::getline(std::cin, temp_str);
       temp_movie.setDirector(temp_str);
+      // Cek panjang maksimum atribut 'Direktor'
       if(max_lens[2] < temp_movie.getDirector().size()) max_lens[2] = temp_movie.getDirector().size();
 
       std::cout << "Masukkan bahasa dub     : ";
       std::getline(std::cin, temp_str);
       temp_movie.setLang(temp_str);
+      // Cek panjang maksimum atribut 'Bahasa'
       if(max_lens[3] < temp_movie.getLang().size()) max_lens[3] = temp_movie.getLang().size();
 
       do{
         std::cout << "Masukkan durasi (menit) : ";
+        // Input untuk atribut integer tetap menggunakan input string, dikarenakan ketika pengguna memasukkan string
+        // saat input integer, C++ akan mengeluarkan error yang tidak bisa ditangkap dengan try-catch
         std::getline(std::cin, temp_str);
+        // Daripada membuat fungsi baru sehingga dapat 'menangkap' error ketika memasukkan string pada input integer,
+        // lebih simpel menerima input dalam string lalu di validasi manual
         temp_int = cstrtoint(temp_str);
         res = temp_movie.setMinutes(temp_int);
+        // Cek panjang maksimum atribut 'Durasi'
         if(res == 0 && max_lens[4] < intlen(temp_movie.getMinutes()) + 1) max_lens[4] = intlen(temp_movie.getMinutes()) + 1;
       } while(res != 0);
 
@@ -179,6 +205,7 @@ int main() {
         std::getline(std::cin, temp_str);
         temp_int = cstrtoint(temp_str);
         res = temp_movie.setYear(temp_int);
+        // Cek panjang maksimum atribut 'Tahun rilis'
         if(res == 0 && max_lens[5] < intlen(temp_movie.getYear())) max_lens[5] = intlen(temp_movie.getYear());
       } while(res != 0);
 
@@ -187,18 +214,23 @@ int main() {
         std::getline(std::cin, temp_str);
         temp_int = cstrtoint(temp_str);
         res = temp_movie.setPrice(temp_int);
+        // Cek panjang maksimum atribut 'Harga tiket'
         if(res == 0 && max_lens[6] < intlen(temp_movie.getPrice()) + 2) max_lens[6] = intlen(temp_movie.getPrice()) + 2;
       } while(res != 0);
 
       movies.push_back(temp_movie);
+      // Cek panjang maksimum atribut 'ID'. Atribut 'ID" disini menggunakan indeks vektor + 1, sehingga panjang digit
+      // -nya dapat mudah dihitung dari jumlah item-nya
       if(max_lens[0] < intlen(movies.size())) max_lens[0] = intlen(movies.size());
     } else if(choice == "3") {
+      // Ubah data
       if(movies.size() <= 0) {
         std::cout << "Tidak ada data film untuk diubah!";
         choice = "-1";
       } else {
         int temp_id = 0;
 
+        // Blok kode do-while() disini memastikan ID yang dimasukkan benar-benar ada
         do{
           std::cout << "Masukkan ID film : ";
           if(std::cin >> temp_id) {
@@ -241,6 +273,8 @@ int main() {
               } while(res != 0);
             } else if(temp_choice == "2") {
               std::cout << "Masukkan nama direktor baru : ";
+              // Karena input perubahan setiap atribut terpisah, dan diantara input atribut terdapat input untuk opsi, 
+              // maka '\n' dari input opsi harus dilahap pada tiap input perubahan atribut
               if(res == 0) std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
               std::getline(std::cin, temp_str);
               movies[temp_id - 1].setDirector(temp_str);
@@ -285,12 +319,15 @@ int main() {
         }
       }
     } else if(choice == "4") {
+      // Hapus data film
       if(movies.size() <= 0) {
         std::cout << "Tidak ada data film untuk dihapus!";
         choice = "-1";
       } else {
         int temp_id = 0;
 
+        // Sama seperti di blok kode perubahan data, ada blok kode do-while() di awal untuk memastikan ID yang
+        // dimasukkan benar-benar ada
         do{
           std::cout << "Masukkan ID film : ";
           if(std::cin >> temp_id) {
@@ -309,14 +346,19 @@ int main() {
         }
       }
     } else if(choice == "5") {
+      // Cari data spesifik. Pencarian dibuat berdasarkan atribut judul atau nama direktor
       std::vector<Movie> temp_movies;
       std::string temp_str = "";
       
       std::cout << "Masukkan kata kunci pencarian : ";
+      // Seperti biasa, lahap dulu '\n' dari input opsi sebelumnya
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       std::getline(std::cin, temp_str);
       temp_str = strToLower(temp_str);
 
+      // Filter vektor, pastikan hanya film yang mengandung kata kunci pada judul atau nama direktornya yang 
+      // ditampilkan. Judul serta nama direktor dan kata kunci diubah ke lowercase sehingga pencarian menjadi
+      // case-insensitive
       for(int i = 0; i < movies.size(); i++) {
         if(
           strToLower(movies[i].getTitle()).find(temp_str) != std::string::npos || 
