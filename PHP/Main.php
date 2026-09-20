@@ -3,10 +3,13 @@ include "Movie.php";
 
 session_start();
 
+// Kata kunci pencarian
 $search = "";
 
+// Kata kunci pencarian diterima lewat parameter metode GET
 if(isset($_GET["search"])) $search = $_GET["search"];
 if(!isset($_SESSION["movies"])) {
+  // Data dummy, sekaligus inisiasi session
   $_SESSION["movies"] = [
     new Movie(1, "She-Hulk: Attorney at Law", "Kat Coiro", "Inggris", 306, 2022, 54000, "movie1.webp"),
     new Movie(2, "Avengers: Endgame", "Russo brothers", "Inggris", 181, 2019, 30000, "movie2.gif"),
@@ -54,6 +57,7 @@ if(!isset($_SESSION["movies"])) {
           if(count($_SESSION["movies"]) > 0) {
             $movies = array_filter($_SESSION["movies"], fn($movie) => str_contains(strtolower($movie->getTitle()), strtolower($search)) || str_contains(strtolower($movie->getDirector()), strtolower($search)));
 
+            // Tampilkan masing-masing data
             foreach($movies as $movie) {
           ?>
             <tr>

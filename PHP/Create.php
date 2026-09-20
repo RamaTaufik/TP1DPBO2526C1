@@ -3,29 +3,32 @@ include "Movie.php";
 
 session_start();
 
-$e_msg = "";
-$e_idx = 0;
+$e_msg = ""; // Pesan error yang tampil jika ada error
+$e_idx = 0;  // Indeks input ke-berapa yang mengalami error
 
+// Form penambahan data sekaligus kode menambahkan data ke session dibuat dalam satu file yang sama disini. Untuk
+// membedakan proses penambahan data dan menambahkan data ke session, proses menambahkan data ke session menggunakan
+// metode POST
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
   if(!isset($_SESSION["movies"])) {
-    $_SESSION["movies"] = [
-      new Movie(1, "She-Hulk: Attorney at Law", "Kat Coiro", "Inggris", 306, 2022, 54000, "movie1.webp"),
-      new Movie(2, "Avengers: Endgame", "Russo brothers", "Inggris", 181, 2019, 30000, "movie2.gif"),
-      new Movie(3, "Moon Knight", "Mohamed Diab", "Inggris", 296, 2022, 65000, "movie3.jpg"),
-      new Movie(4, "The Batman", "Matt Reeves", "Inggris", 176, 2022, 29000, "movie4.jpg"),
-      new Movie(5, "Doctor Strang in the Multiverse of Madness", "Sam Raimi", "Inggris", 126, 2022, 43000, "movie5.jpg")
-    ];
+    // Inisiasi session
+    $_SESSION["movies"] = [];
   }
 
   $title = $_POST["title"];
+  // Validasi input 'Judul'
   if($title === "") {
     $e_msg = "Judul tidak boleh kosong!";
     $e_idx = 1;
   } else {
+    // Atribut 'Direktor' dan 'Bahasa' merupakan string yang bisa kosong, sehingga tidak perlu validasi tambahan
     $director = $_POST["director"];
     $lang = $_POST["lang"];
 
     $minutes = $_POST["minutes"];
+    // Validasi input 'Durasi'. ctype_digit memastikan angka yang dimasukkan benar-benar hanya angka 0 sampai 9, dan
+    // menolak input yang mengandung desimal (.), negatif (-), atau abjad notasi angka (e). Validasi integer disini
+    // sebenarnya hanya 'safe-net' cadangan, karena input HTML di laman ini sudah melakukan validasi yang sama
     if($minutes !== "" && !ctype_digit($minutes)) {
       $e_msg = "Durasi harus berupa bilangan bulat positif!";
       $e_idx = 4;
@@ -33,6 +36,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
       $minutes = $minutes === ""? 0: (int)$minutes;
     
       $year = $_POST["year"];
+      // Validasi input tahun rilis
       if($year !== "" && !ctype_digit($year)) {
         $e_msg = "Tahun rilis harus berupa bilangan bulat positif!";
         $e_idx = 5;
@@ -40,20 +44,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $year = $year === ""? 0: (int)$year;
 
         $price = $_POST["price"];
+        // Validasi input harga tiket
         if($price !== "" && !ctype_digit($price)) {
           $e_msg = "Harga tiket harus berupa bilangan bulat positif!";
           $e_idx = 6;
         } else {
           $price = $price === ""? 0: (int)$price;
           $img_url = "-";
-          $id = count($_SESSION["movies"]) > 0? (int)($_SESSION["movies"][array_key_last($_SESSION["movies"])]->getId()) + 1: 1;
+          // ID dihitung dari ID terbesar + 1, atau 1 jika merupakan record pertama
+          $id = isset($_SESSION["movies"]) && count($_SESSION["movies"]) > 0? (int)($_SESSION["movies"][array_key_last($_SESSION["movies"])]->getId()) + 1: 1;
 
+          // Proses memasukkan file ke direktori lokal /images
           if(isset($_FILES['img'])) {
             $img = $_FILES['img'];
+            // Nama gambar di-format sebagai movie[id].[extensi file]
             $file_name = 'movie'.$id.'.'.strtolower(pathinfo($img['name'], PATHINFO_EXTENSION));
             $target_dir = __DIR__.'/images/';
 
-            if (!is_dir($target_dir)) {
+            // Memastikan direktori /images benar-benar ada, dan jika tidak, buat dulu
+            if(!is_dir($target_dir)) {
               mkdir($target_dir, 0755, true);
             }
 
@@ -64,9 +73,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
           }
           
-
+          // Masukkan data baru ke session
           $_SESSION["movies"][] = new Movie($id, $title, $director, $lang, $minutes, $year, $price, $img_url);
 
+          // Redirect ke Main.php
           header("Location: Main.php");
           exit;
         }

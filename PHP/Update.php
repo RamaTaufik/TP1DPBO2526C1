@@ -3,6 +3,8 @@ include "Movie.php";
 
 session_start();
 
+// Jika laman ini dicoba untuk diakses tanpa mengirim parameter ID lewat metode GET, langsung 'lempar' balik ke laman
+// Main.php
 if(!isset($_GET["id"])) {
   header("Location: Main.php");
   exit;
@@ -13,14 +15,9 @@ $movie = NULL;
 $e_msg = "";
 $e_idx = 0;
 
+// Pastikan session sudah ada, dan jika sudah ada, maka cari data dari record dengan ID yang dikirim
 if(!isset($_SESSION["movies"])) {
-  $_SESSION["movies"] = [
-    new Movie(1, "She-Hulk: Attorney at Law", "Kat Coiro", "Inggris", 306, 2022, 54000, "movie1.webp"),
-    new Movie(2, "Avengers: Endgame", "Russo brothers", "Inggris", 181, 2019, 30000, "movie2.gif"),
-    new Movie(3, "Moon Knight", "Mohamed Diab", "Inggris", 296, 2022, 65000, "movie3.jpg"),
-    new Movie(4, "The Batman", "Matt Reeves", "Inggris", 176, 2022, 29000, "movie4.jpg"),
-    new Movie(5, "Doctor Strang in the Multiverse of Madness", "Sam Raimi", "Inggris", 126, 2022, 43000, "movie5.jpg")
-  ];
+  $_SESSION["movies"] = [];
 } else {
   foreach($_SESSION["movies"] as $m) {
     if($m->getId() === $id) {
@@ -30,6 +27,8 @@ if(!isset($_SESSION["movies"])) {
   }
 }
 
+// Sama seperti laman Create.php, proses pengubahan data dan merubah data di session dilakukan dalam laman yang sama,
+// dibedakan dengan metode. Validasi pun kurang lebih serupa dengan yang ada di laman Create.php
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $title = $_POST["title"];
   if($title === "") {
@@ -62,6 +61,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
           $img_url = $movie->getImgUrl();
           $id = $movie->getId();
 
+          // Berbeda dengan Create.php, disini ada sedikit proses tambahan pada penambahan gambar, yaitu memastikan
+          // gambar sebelumnya dihapus dulu, baru menambahkan gambar yang baru. Tentu, gambar lama hanya akan dihapus
+          // jika ada input gambar baru
           if(isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
             $img = $_FILES['img'];
             $file_name = 'movie'.$id.'.'.strtolower(pathinfo($img['name'], PATHINFO_EXTENSION));

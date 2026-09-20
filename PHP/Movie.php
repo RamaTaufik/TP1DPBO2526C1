@@ -1,8 +1,8 @@
 <?php
 
 class Movie {
-  private string $title, $director, $lang, $img_url;
-  private int $id, $minutes, $year, $price;
+  private string $title, $director, $lang, $img_url; // Judul, Direktor, Bahasa, Path lokal menuju gambar promosi
+  private int $id, $minutes, $year, $price; // ID, Durasi, Tahun rilis, Harga tiket
 
   public function __construct(int $id, string $t, string $d, string $l, int $m, int $y, int $p, string $i) {
     $this->setId($id);

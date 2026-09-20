@@ -78,6 +78,9 @@ CINEMA ABSOLUT merupakan aplikasi yang mengelola data film. Tersedia dalam 2 *in
 | ![Before delete in CLI](documentations/delete_before-CLI.png) | ![Before delete in Web](documentations/delete_before-Web.png) |
 | ![After delete in CLI](documentations/delete_after-CLI.png) | ![After delete in Web](documentations/delete_after-Web.png) |
 
-ㅤ
-ㅤ
+# CATATAN
+Untuk Implementasi Web, pastikan membuka laman Main.php terlebih dahulu, karena data dummy diisi ketika masuk ke laman Main.php dalam keadaan belum ada data session. Pada laman Create.php dan Update.php, terdapat inisiasi session kosong untuk jaga-jaga, sehingga data dummy dari laman Main.php tidak akan masuk jika membuka laman Create.php atau Update.php terlebih dahulu. 
+
+Jika sudah terlanjur membuka laman Create.php atau Update.php, maka hapus session dengan melakukan klik kanan, lalu Inspect -> Application -> Cookies, dan hapus session-nya.
+
 <img src="documentations/_watermark.png" width="250px" align="right">

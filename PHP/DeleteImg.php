@@ -3,6 +3,8 @@ include "Movie.php";
 
 session_start();
 
+// Serupa dengan kode di Delete.php, hanya saja disini proses berhenti pada penghapusan gambar, lalu langsung
+// redirect kembali ke Main.php
 if(isset($_SESSION["movies"]) && isset($_POST["id"])) {
   $id = (int)$_POST["id"];
   $img = NULL;
