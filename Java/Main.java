@@ -2,8 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+  // Panjang maksimum dari setiap atribut milik semua objek. Secara default, maksimum nya di-set terlebih dahulu pada
+  // panjang nama masing-masing atribut (ID | Judul | Direktor | Bahasa | Durasi | Tahun | Harga)
   private static int[] maxLens = {2, 5, 8, 6, 6, 5, 5};
 
+  // Fungsi untuk menghitung jumlah digit suatu integer positif
   private static int intlen(int num) {
     if(num < 10) {
       return 1;
@@ -11,12 +14,14 @@ public class Main {
     return intlen(num / 10) + 1;
   }
 
+  // Prosedur untuk meng-print karakter c sebanyak n
   private static void printchar(int n, char c) {
     for(int i = 0; i < n; i++) {
       System.out.print(c);
     }
   }
 
+  // Prosedur untuk meng-print border pada tabel di CLI
   private static void printborder() {
     for(int i = 0; i < 7; i++) {
       System.out.print("+");
@@ -25,7 +30,9 @@ public class Main {
     System.out.println("+");
   }
 
+  // Prosedur untuk meng-print data film ke bentuk tabel
   private static void printMovies(ArrayList<Movie> ms) {
+    // Print header tabel
     printborder();
     System.out.print("| ID");
     printchar(maxLens[0] - 2, ' ');
@@ -57,14 +64,14 @@ public class Main {
       printchar(maxLens[3] - ms.get(i).getLang().length(), ' ');
 
       System.out.print(" | ");
-      printchar(maxLens[4] - 1 - intlen(ms.get(i).getMinutes()), ' ');
+      printchar(maxLens[4] - 1 - intlen(ms.get(i).getMinutes()), ' '); // Dikurangi satu karena ada penambahan 'm'
       System.out.print(ms.get(i).getMinutes() + "m");
 
       System.out.print(" | " + ms.get(i).getYear());
       printchar(maxLens[5] - intlen(ms.get(i).getYear()), ' ');
 
       System.out.print(" | Rp");
-      printchar(maxLens[6] - 2 - intlen(ms.get(i).getPrice()), ' ');
+      printchar(maxLens[6] - 2 - intlen(ms.get(i).getPrice()), ' '); // Dikurangi satu karena ada penambahan 'Rp'
       System.out.println(ms.get(i).getPrice() + " |");
 
       printborder();
@@ -72,10 +79,11 @@ public class Main {
   }
 
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
-    ArrayList<Movie> movies = new ArrayList<>();
-    String choice = "0";
+    Scanner scanner = new Scanner(System.in); // Inisialisasi scanner untuk input
+    ArrayList<Movie> movies = new ArrayList<>(); // List data film
+    String choice = "0"; // Variabel untuk input opsi
 
+    // Data dummy
     movies.add(new Movie("Interstellar", "Christopher Nolan", "Inggris", 169, 2014, 30000));
     movies.add(new Movie("Inception", "Christopher Nolan", "Inggris", 148, 2010, 35000));
     movies.add(new Movie("Parasite", "Bong Joon-ho", "Korea", 132, 2019, 40000));
@@ -85,6 +93,7 @@ public class Main {
     movies.add(new Movie("Pengabdi Setan", "Joko Anwar", "Indonesia", 107, 2017, 30000));
     movies.add(new Movie("Godzilla Minus One", "Takashi Yamazaki", "Jepang", 125, 2023, 40000));
 
+    // Perubahan panjang maksimum setiap atribut setelah penambahan data dummy
     maxLens[1] = 18;
     maxLens[2] = 17;
     maxLens[3] = 9;
@@ -98,7 +107,9 @@ public class Main {
     System.out.println("/___/ /_/ /_/ |__/ /___/ /_/  /_/ /_/ /_/   /_/ /_/ /_____/ /____/ /_____/ /___/ /_____/   /_/");
     System.out.println("\n> CINEMA ABSOLUT DATA CENTER <");
 
+    // Loop utama
     do{
+      // Jika terjadi kesalahan dalam input opsi, tidak perlu print ulang pilihan opsi agar tidak memenuhi layar
       if(choice.equals("0") || choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("4") || choice.equals("5")) {
         System.out.println("\n1. Lihat data film");
         System.out.println("2. Tambah data film baru");
@@ -112,8 +123,10 @@ public class Main {
       choice = scanner.nextLine();
 
       if(choice.equals("1")) {
+        // Lihat semua data
         printMovies(movies);
       } else if(choice.equals("2")) {
+        // Tambah data
         int tempInt, res = 0;
         String tempStr;
         Movie tempMovie = new Movie();
@@ -122,17 +135,20 @@ public class Main {
           System.out.print("Masukkan judul film     : ");
           tempStr = scanner.nextLine();
           res = tempMovie.setTitle(tempStr);
+          // Cek panjang maksimum atribut 'Judul'
           if(res == 0 && maxLens[1] < tempMovie.getTitle().length()) maxLens[1] = tempMovie.getTitle().length();
         } while(res != 0);
 
         System.out.print("Masukkan nama direktor  : ");
         tempStr = scanner.nextLine();
         tempMovie.setDirector(tempStr);
+        // Cek panjang maksimum atribut 'Direktor'
         if(maxLens[2] < tempMovie.getDirector().length()) maxLens[2] = tempMovie.getDirector().length();
 
         System.out.print("Masukkan bahasa dub     : ");
         tempStr = scanner.nextLine();
         tempMovie.setLang(tempStr);
+        // Cek panjang maksimum atribut 'Bahasa'
         if(maxLens[3] < tempMovie.getLang().length()) maxLens[3] = tempMovie.getLang().length();
 
         do{
@@ -140,9 +156,12 @@ public class Main {
           try{
             tempInt = Integer.parseInt(scanner.nextLine());
           } catch(NumberFormatException e) {
+            // Berbeda dengan C++, try-catch di Java bisa 'menangkap' error ketika memasukkan string atau desimal
+            // pada input integer
             tempInt = -1;
           }
           res = tempMovie.setMinutes(tempInt);
+          // Cek panjang maksimum atribut 'Durasi'
           if(res == 0 && maxLens[4] < intlen(tempMovie.getMinutes()) + 1) maxLens[4] = intlen(tempMovie.getMinutes()) + 1;
         } while(res != 0);
 
@@ -154,6 +173,7 @@ public class Main {
             tempInt = -1;
           }
           res = tempMovie.setYear(tempInt);
+          // Cek panjang maksimum atribut 'Tahun rilis'
           if(res == 0 && maxLens[5] < intlen(tempMovie.getYear())) maxLens[5] = intlen(tempMovie.getYear());
         } while(res != 0);
 
@@ -165,18 +185,23 @@ public class Main {
             tempInt = -1;
           }
           res = tempMovie.setPrice(tempInt);
+          // Cek panjang maksimum atribut 'Harga tiket'
           if(res == 0 && maxLens[6] < intlen(tempMovie.getPrice()) + 2) maxLens[6] = intlen(tempMovie.getPrice()) + 2;
         } while(res != 0);
 
         movies.add(tempMovie);
+        // Cek panjang maksimum atribut 'ID'. Atribut 'ID" disini menggunakan indeks arraylist + 1, sehingga panjang 
+        // digit-nya dapat mudah dihitung dari jumlah item-nya
         if(maxLens[0] < intlen(movies.size())) maxLens[0] = intlen(movies.size());
       } else if(choice.equals("3")) {
+        // Ubah data
         if(movies.isEmpty()) {
           System.out.print("Tidak ada data film untuk diubah!");
           choice = "-1";
         } else {
           int tempId = 0;
 
+          // Blok kode do-while() disini memastikan ID yang dimasukkan benar-benar ada
           do{
             System.out.print("Masukkan ID film : ");
             try{
@@ -210,6 +235,7 @@ public class Main {
               System.out.print("\nMasukkan nomor atribut untuk diubah : ");
               tempChoice = scanner.nextLine();
 
+              // Input untuk merubah data kurang lebih sama dengan input ketika menambah data
               if(tempChoice.equals("1")) {
                 do{
                   System.out.print("Masukkan judul baru : ");
@@ -267,12 +293,15 @@ public class Main {
           }
         }
       } else if(choice.equals("4")) {
+        // Hapus data
         if(movies.isEmpty()) {
           System.out.print("Tidak ada data film untuk dihapus!");
           choice = "-1";
         } else {
           int tempId = 0;
 
+          // Sama seperti di blok kode perubahan data, ada blok kode do-while() di awal untuk memastikan ID yang
+          // dimasukkan benar-benar ada
           do{
             System.out.print("Masukkan ID film : ");
             try{
@@ -292,11 +321,15 @@ public class Main {
           }
         }
       } else if(choice.equals("5")) {
+        // Cari data spesifik. Pencarian dibuat berdasarkan atribut judul atau nama direktor
         ArrayList<Movie> tempMovies = new ArrayList<>();
 
         System.out.print("Masukkan kata kunci pencarian : ");
         String tempStr = scanner.nextLine().toLowerCase();
 
+        // Filter arraylist, pastikan hanya film yang mengandung kata kunci pada judul atau nama direktornya yang 
+        // ditampilkan. Judul serta nama direktor dan kata kunci diubah ke lowercase sehingga pencarian menjadi
+        // case-insensitive
         for(Movie movie : movies) {
           if(
             movie.getTitle().toLowerCase().contains(tempStr) ||

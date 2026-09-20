@@ -1,6 +1,6 @@
 public class Movie {
-  private String title, director, lang;
-  private int minutes, year, price;
+  private String title, director, lang; // Judul, Direktor, Bahasa
+  private int minutes, year, price; // Durasi, Tahun, Harga
 
   public Movie() {}
 
