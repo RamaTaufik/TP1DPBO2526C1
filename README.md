@@ -46,7 +46,7 @@ CINEMA ABSOLUT merupakan aplikasi yang mengelola data film. Tersedia dalam 2 *in
   | ![Screenshot CLI](documentations/empty_title-CLI.png) | ![Screenshot Web](documentations/empty_title-Web.png) |
 
 # DOKUMENTASI FITUR
-1. Menambahkan data
+1. Menambahkan data (+ *before* & *after*)
 
 | CLI | WEB |
 | --- | --- |
@@ -63,14 +63,14 @@ CINEMA ABSOLUT merupakan aplikasi yang mengelola data film. Tersedia dalam 2 *in
 | CLI | WEB |
 | --- | --- |
 | ![Search in CLI](documentations/search-CLI.png) | ![Search in Web](documentations/search-Web.png) |
-4. Merubah data
+4. Merubah data (+ *before* & *after*)
 
 | CLI | WEB |
 | --- | --- |
 | ![Update in CLI](documentations/update-CLI.png) | ![Update in Web](documentations/update-Web.png) |
 | ![Before update in CLI](documentations/update_before-CLI.png) | ![Before update in Web](documentations/update_before-Web.png) |
 | ![After update in CLI](documentations/update_after-CLI.png) | ![After update in Web](documentations/update_after-Web.png) |
-5. Menghapus data
+5. Menghapus data (+ *before* & *after*)
 
 | CLI | WEB |
 | --- | --- |
@@ -78,5 +78,6 @@ CINEMA ABSOLUT merupakan aplikasi yang mengelola data film. Tersedia dalam 2 *in
 | ![Before delete in CLI](documentations/delete_before-CLI.png) | ![Before delete in Web](documentations/delete_before-Web.png) |
 | ![After delete in CLI](documentations/delete_after-CLI.png) | ![After delete in Web](documentations/delete_after-Web.png) |
 
-
-![Watermark](documentations/_watermark.png)
+ 
+ 
+<img src="documentations/_watermark.png" width="250px" align="right">
