@@ -26,16 +26,24 @@ CINEMA ABSOLUT merupakan aplikasi yang mengelola data film. Tersedia dalam 2 *in
 *Error handling* dibawah berlaku untuk semua implementasi. Saat terjadi *error*, program akan mengembalikan pesan dan meminta ulang *input* yang sesuai.
   1. Mencoba *input string* / karakter non-angka pada atribut angka:
 
-  | ![Implementasi CLI](documentations/str_to_int-CLI.png) | ![Implementasi CLI](documentations/str_to_int-Web.png) |
+  | CLI | WEB |
+  | --- | --- |
+  | ![Screenshot CLI](documentations/str_to_int-CLI.png) | ![Screenshot Web](documentations/str_to_int-Web.png) |
   2. Mencoba *input* angka negatif pada atribut angka (semua atribut angka harus positif atau 0):
 
-  | ![Implementasi CLI](documentations/neg_to_int-CLI.png) | ![Implementasi CLI](documentations/neg_to_int-Web.png) |
+  | CLI | WEB |
+  | --- | --- |
+  | ![Screenshot CLI](documentations/neg_to_int-CLI.png) | ![Screenshot Web](documentations/neg_to_int-Web.png) |
   3. Mencoba *input* angka desimal pada atribut angka (semua atribut angka harus bilangan bulat):
 
-  | ![Implementasi CLI](documentations/dec_to_int-CLI.png) | ![Implementasi CLI](documentations/dec_to_int-Web.png) |
+  | CLI | WEB |
+  | --- | --- |
+  | ![Screenshot CLI](documentations/dec_to_int-CLI.png) | ![Screenshot Web](documentations/dec_to_int-Web.png) |
   4. Mencoba mengosongkan atribut 'Judul':
 
-  | ![Implementasi CLI](documentations/empty_title-CLI.png) | ![Implementasi CLI](documentations/empty_title-Web.png) |
+  | CLI | WEB |
+  | --- | --- |
+  | ![Screenshot CLI](documentations/empty_title-CLI.png) | ![Screenshot Web](documentations/empty_title-Web.png) |
 
 # DOKUMENTASI
 
