@@ -12,6 +12,33 @@ int intlen(int num) {
   return intlen(num / 10) + 1;
 }
 
+int cstrtoint(std::string str) {
+  int num = 0;
+
+  for(int i = 0; i < str.size(); i++) {
+    if(str[i] < '0' || str[i] > '9') {
+      return -1;
+    } else {
+      num = (num * 10) + (str[i] - '0');
+    }
+  }
+
+  return num;
+}
+
+std::string strToLower(std::string str) {
+  int i = 0;
+  std::string new_str = str;
+
+  while(i < str.size()) {
+    if(new_str[i] >= 'A' && new_str[i] <= 'Z') new_str[i] += 32;
+
+    i++;
+  }
+
+  return new_str;
+}
+
 void printchar(int n, char c) {
   for(int i = 0; i < n; i++) {
     std::cout << c;
@@ -141,21 +168,24 @@ int main() {
 
       do{
         std::cout << "Masukkan durasi (menit) : ";
-        std::cin >> temp_int;
+        std::getline(std::cin, temp_str);
+        temp_int = cstrtoint(temp_str);
         res = temp_movie.setMinutes(temp_int);
         if(res == 0 && max_lens[4] < intlen(temp_movie.getMinutes()) + 1) max_lens[4] = intlen(temp_movie.getMinutes()) + 1;
       } while(res != 0);
 
       do{
         std::cout << "Masukkan tahun rilis    : ";
-        std::cin >> temp_int;
+        std::getline(std::cin, temp_str);
+        temp_int = cstrtoint(temp_str);
         res = temp_movie.setYear(temp_int);
         if(res == 0 && max_lens[5] < intlen(temp_movie.getYear())) max_lens[5] = intlen(temp_movie.getYear());
       } while(res != 0);
 
       do{
         std::cout << "Masukkan harga          : Rp";
-        std::cin >> temp_int;
+        std::getline(std::cin, temp_str);
+        temp_int = cstrtoint(temp_str);
         res = temp_movie.setPrice(temp_int);
         if(res == 0 && max_lens[6] < intlen(temp_movie.getPrice()) + 2) max_lens[6] = intlen(temp_movie.getPrice()) + 2;
       } while(res != 0);
@@ -224,21 +254,27 @@ int main() {
             } else if(temp_choice == "4") {
               do{
                 std::cout << "Masukkan durasi baru : ";
-                std::cin >> temp_int;
+                if(res == 0) std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::getline(std::cin, temp_str);
+                temp_int = cstrtoint(temp_str);
                 res = movies[temp_id - 1].setMinutes(temp_int);
                 if(res == 0 && max_lens[4] < intlen(movies[temp_id - 1].getMinutes()) + 1) max_lens[4] = intlen(movies[temp_id - 1].getMinutes()) + 1;
               } while(res != 0);
             } else if(temp_choice == "5") {
               do{
                 std::cout << "Masukkan tahun rilis baru : ";
-                std::cin >> temp_int;
+                if(res == 0) std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::getline(std::cin, temp_str);
+                temp_int = cstrtoint(temp_str);
                 res = movies[temp_id - 1].setYear(temp_int);
                 if(res == 0 && max_lens[5] < intlen(movies[temp_id - 1].getYear())) max_lens[5] = intlen(movies[temp_id - 1].getYear());
               } while(res != 0);
             } else if(temp_choice == "6") {
               do{
                 std::cout << "Masukkan harga baru : Rp";
-                std::cin >> temp_int;
+                if(res == 0) std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::getline(std::cin, temp_str);
+                temp_int = cstrtoint(temp_str);
                 res = movies[temp_id - 1].setPrice(temp_int);
                 if(res == 0 && max_lens[6] < intlen(movies[temp_id - 1].getPrice()) + 2) max_lens[6] = intlen(movies[temp_id - 1].getPrice()) + 2;
               } while(res != 0);

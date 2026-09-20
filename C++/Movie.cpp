@@ -2,19 +2,6 @@
 #include <vector>
 #include <iostream>
 
-std::string strToLower(std::string str) {
-  int i = 0;
-  std::string new_str = str;
-
-  while(i < str.size()) {
-    if(new_str[i] >= 'A' && new_str[i] <= 'Z') new_str[i] += 32;
-
-    i++;
-  }
-
-  return new_str;
-}
-
 class Movie {
   private:
     std::string title, director, lang;
