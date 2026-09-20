@@ -48,11 +48,35 @@ CINEMA ABSOLUT merupakan aplikasi yang mengelola data film. Tersedia dalam 2 *in
 # DOKUMENTASI FITUR
 1. Menambahkan data
 
-  | CLI | WEB |
-  | --- | --- |
-  | ![Create in CLI](documentations/create-CLI.png) | ![Create in Web](documentations/create-Web.png) |
-  | ![Before create in CLI](documentations/create_before-CLI.png) | ![Before create in Web](documentations/create_before-Web.png) |
-  | ![After create in CLI](documentations/create_after-CLI.png) | ![After create in Web](documentations/create_after-Web.png) |
+| CLI | WEB |
+| --- | --- |
+| ![Create in CLI](documentations/create-CLI.png) | ![Create in Web](documentations/create-Web.png) |
+| ![Before create in CLI](documentations/create_before-CLI.png) | ![Before create in Web](documentations/create_before-Web.png) |
+| ![After create in CLI](documentations/create_after-CLI.png) | ![After create in Web](documentations/create_after-Web.png) |
+2. Melihat data
+
+| CLI | WEB |
+| --- | --- |
+| ![Read in CLI](documentations/read-CLI.png) | ![Read in Web](documentations/read-Web.png) |
+2. Mencari data. Pencarian dibuat berdasarkan judul atau nama direktor, dan bersifat *case-insensitive*
+
+| CLI | WEB |
+| --- | --- |
+| ![Search in CLI](documentations/search-CLI.png) | ![Search in Web](documentations/search-Web.png) |
+4. Merubah data
+
+| CLI | WEB |
+| --- | --- |
+| ![Update in CLI](documentations/update-CLI.png) | ![Update in Web](documentations/update-Web.png) |
+| ![Before update in CLI](documentations/update_before-CLI.png) | ![Before update in Web](documentations/update_before-Web.png) |
+| ![After update in CLI](documentations/update_after-CLI.png) | ![After update in Web](documentations/update_after-Web.png) |
+5. Menghapus data
+
+| CLI | WEB |
+| --- | --- |
+| ![Delete in CLI](documentations/delete-CLI.png) | ![Delete in Web](documentations/delete-Web.png) |
+| ![Before delete in CLI](documentations/delete_before-CLI.png) | ![Before delete in Web](documentations/delete_before-Web.png) |
+| ![After delete in CLI](documentations/delete_after-CLI.png) | ![After delete in Web](documentations/delete_after-Web.png) |
 
 
 ![Watermark](documentations/_watermark.png)
