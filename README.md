@@ -45,8 +45,15 @@ CINEMA ABSOLUT merupakan aplikasi yang mengelola data film. Tersedia dalam 2 *in
   | --- | --- |
   | ![Screenshot CLI](documentations/empty_title-CLI.png) | ![Screenshot Web](documentations/empty_title-Web.png) |
 
-# DOKUMENTASI
+# DOKUMENTASI FITUR
+1. Menambahkan data
 
+  | CLI | WEB |
+  | --- | --- |
+  | ![Create in CLI](documentations/create-CLI.png) | ![Create in Web](documentations/create-Web.png) |
+  | --- | --- |
+  | ![Before create in CLI](documentations/create_before-CLI.png) | ![Before create in Web](documentations/create_before-Web.png) |
+  | ![After create in CLI](documentations/create_after-CLI.png) | ![After create in Web](documentations/create_after-Web.png) |
 
 
 ![Watermark](documentations/_watermark.png)
