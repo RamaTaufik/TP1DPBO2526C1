@@ -1,4 +1,5 @@
 > Saya Rama Taufik Azkia dengan NIM 2508497 mengerjakan Tugas Praktikum 1 dalam mata kuliah Desain dan Pemrograman Berorientasi Objek untuk keberkahanNya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin.
+
 *— Janji*
 
 # GARIS BESAR
@@ -9,7 +10,8 @@ CINEMA ABSOLUT merupakan aplikasi yang mengelola data film. Tersedia dalam 2 *in
   4. Bahasa (`lang`), atribut yang menyimpan bahasa utama yang digunakan dalam film. Bernilai '-' jika kosong;
   5. Durasi (`minutes`), atribut yang menyimpan durasi film dalam menit. Bernilai 0 jika kosong;
   6. Tahun rilis (`year`), atribut yang menyimpan data perilisan perdana film. Bernilai 0 jika kosong;
-  7. Harga tiker (`price`), atribut yang menyimpan data harga tiket. Bernilai 0 jika kosong;
+  7. Harga tiker (`price`), atribut yang menyimpan data harga tiket. Bernilai 0 jika kosong.
+
 **Khusus** untuk **implementasi web**, terdapat atribut tambahan 'Gambar promosi' (`img_url`). Hal ini yang menyebabkan 'ID' implementasi *web* dibuat tidak berubah, karena nama gambar disimpan sesuai ID-nya.
 
 # FITUR
