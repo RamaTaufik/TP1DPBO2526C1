@@ -4,21 +4,26 @@ from Movie import Movie
 # panjang judul masing-masing kolom (ID | Judul | Direktor | Bahasa | Durasi | Tahun | Harga)
 max_lens = [2, 5, 8, 6, 6, 5, 5]
 
+# Fungsi untuk menghitung jumlah digit suatu integer positif
 def intlen(num):
   if num < 10:
     return 1
   return intlen(num // 10) + 1
 
+# Prosedur untuk meng-print karakter c sebanyak n
 def printchar(n, c):
   print(c * n, end="")
 
+# Prosedur untuk meng-print border pada tabel di CLI
 def printborder():
   for i in range(7):
     print("+", end="")
     printchar(max_lens[i] + 2, "-")
   print("+")
 
+# Prosedur untuk meng-print data film ke bentuk tabel
 def printMovies(ms):
+  # Print header tabel
   printborder()
   print("| ID", end="")
   printchar(max_lens[0] - 2, " ")
@@ -38,6 +43,7 @@ def printMovies(ms):
   printborder()
 
   for i in range(len(ms)):
+    # Print masing-masing data
     print("| ", end="")
     printchar(max_lens[0] - intlen(i + 1), " ")
     print(f"{i + 1} | {ms[i].getTitle()}", end="")
@@ -50,23 +56,24 @@ def printMovies(ms):
     printchar(max_lens[3] - len(ms[i].getLang()), " ")
 
     print(" | ", end="")
-    printchar(max_lens[4] - 1 - intlen(ms[i].getMinutes()), " ")
+    printchar(max_lens[4] - 1 - intlen(ms[i].getMinutes()), " ") # Dikurangi satu karena ada penambahan 'm'
     print(f"{ms[i].getMinutes()}m", end="")
 
     print(f" | {ms[i].getYear()}", end="")
     printchar(max_lens[5] - intlen(ms[i].getYear()), " ")
 
     print(" | Rp", end="")
-    printchar(max_lens[6] - 2 - intlen(ms[i].getPrice()), " ")
+    printchar(max_lens[6] - 2 - intlen(ms[i].getPrice()), " ") # Dikurangi dua karena ada penambahan 'Rp'
     print(f"{ms[i].getPrice()} |")
 
     printborder()
 
 
 def main():
-  movies = []
-  choice = "0"
+  movies = []  # Array data film
+  choice = "0" # Variabel untuk input opsi
 
+  # Data dummy
   movies.append(Movie("Interstellar", "Christopher Nolan", "Inggris", 169, 2014, 30000))
   movies.append(Movie("Inception", "Christopher Nolan", "Inggris", 148, 2010, 35000))
   movies.append(Movie("Parasite", "Bong Joon-ho", "Korea", 132, 2019, 40000))
@@ -76,6 +83,7 @@ def main():
   movies.append(Movie("Pengabdi Setan", "Joko Anwar", "Indonesia", 107, 2017, 30000))
   movies.append(Movie("Godzilla Minus One", "Takashi Yamazaki", "Jepang", 125, 2023, 40000))
 
+  # Perubahan panjang maksimum setiap atribut setelah penambahan data dummy
   max_lens[1] = 18
   max_lens[2] = 17
   max_lens[3] = 9
@@ -89,7 +97,9 @@ def main():
   print(" /___/ /_/ /_/ |__/ /___/ /_/  /_/ /_/ /_/   /_/ /_/ /_____/ /____/ /_____/ /___/ /_____/   /_/")
   print("\n> CINEMA ABSOLUT DATA CENTER <")
 
+  # Karena pada Python tidak ada do-while(), Maka digunakan kombinasi while() dan break
   while True:
+    # Jika terjadi kesalahan dalam input opsi, tidak perlu print ulang pilihan opsi agar tidak memenuhi layar
     if choice in ["0", "1", "2", "3", "4", "5"]:
       print("\n1. Lihat data film")
       print("2. Tambah data film baru")
@@ -101,8 +111,10 @@ def main():
     choice = input("\nPilih opsi: ")
 
     if choice == "1":
+      # Lihat semua data
       printMovies(movies)
     elif choice == "2":
+      # Tambah data
       res = 0
       temp_movie = Movie("-", "-", "-", 0, 0, 0)
 
@@ -110,21 +122,26 @@ def main():
         temp_str = input("Masukkan judul film     : ")
         res = temp_movie.setTitle(temp_str)
         if res == 0:
+          # Cek panjang maksimum atribut 'Judul'
           if max_lens[1] < len(temp_movie.getTitle()):
             max_lens[1] = len(temp_movie.getTitle())
           break
 
       temp_str = input("Masukkan nama direktor  : ")
       temp_movie.setDirector(temp_str)
+      # Cek panjang maksimum atribut 'Direktor'
       if max_lens[2] < len(temp_movie.getDirector()):
         max_lens[2] = len(temp_movie.getDirector())
 
       temp_str = input("Masukkan bahasa dub     : ")
       temp_movie.setLang(temp_str)
+      # Cek panjang maksimum atribut 'Bahasa'
       if max_lens[3] < len(temp_movie.getLang()):
         max_lens[3] = len(temp_movie.getLang())
 
       while True:
+        # try-except disini tidak menangkap error ketika memasukkan data, melainkan ketika konversi data dari string ke
+        # integer. Berbeda dengan try-catch pada implementasi Java
         try:
           temp_int = int(input("Masukkan durasi (menit) : "))
           res = temp_movie.setMinutes(temp_int)
@@ -132,6 +149,7 @@ def main():
           print("Durasi harus bilangan bulat positif!")
           res = -1
 
+        # Cek panjang maksimum atribut 'Durasi'
         if res == 0:
           if max_lens[4] < intlen(temp_movie.getMinutes()) + 1:
             max_lens[4] = intlen(temp_movie.getMinutes()) + 1
@@ -145,6 +163,7 @@ def main():
           print("Tahun rilis harus bilangan bulat positif!")
           res = -1
 
+        # Cek panjang maksimum atribut 'Tahun rilis'
         if res == 0:
           if max_lens[5] < intlen(temp_movie.getYear()):
             max_lens[5] = intlen(temp_movie.getYear())
@@ -158,21 +177,26 @@ def main():
           print("Harga harus bilangan bulat positif!")
           res = -1
 
+        # Cek panjang maksimum atribut 'Harga'
         if res == 0:
           if max_lens[6] < intlen(temp_movie.getPrice()) + 2:
             max_lens[6] = intlen(temp_movie.getPrice()) + 2
           break
 
       movies.append(temp_movie)
+      # Cek panjang maksimum atribut 'ID'. Atribut 'ID" disini menggunakan indeks array + 1, sehingga panjang digit
+      # -nya dapat mudah dihitung dari jumlah item-nya
       if max_lens[0] < intlen(len(movies)):
         max_lens[0] = intlen(len(movies))
     elif choice == "3":
+      # Ubah data
       if len(movies) <= 0:
         print("Tidak ada data film untuk diubah!", end="")
         choice = "-1"
       else:
         temp_id = 0
 
+        # Blok kode while-break disini memastikan ID yang dimasukkan benar-benar ada
         while True:
           try:
             temp_id = int(input("Masukkan ID film : "))
@@ -200,6 +224,7 @@ def main():
 
             temp_choice = input("\nMasukkan nomor atribut untuk diubah : ")
 
+            # Input untuk merubah data kurang lebih sama dengan input ketika menambah data
             if temp_choice == "1":
               while True:
                 temp_str = input("Masukkan judul baru : ")
@@ -263,11 +288,15 @@ def main():
             if temp_choice == "0":
               break
     elif choice == "4":
+      # Hapus data
       if len(movies) <= 0:
         print("Tidak ada data film untuk dihapus!", end="")
         choice = "-1"
       else:
         temp_id = 0
+
+        # Sama seperti di blok kode perubahan data, ada blok kode while-break di awal untuk memastikan ID yang
+        # dimasukkan benar-benar ada
         while True:
           try:
             temp_id = int(input("Masukkan ID film : "))
@@ -283,10 +312,14 @@ def main():
           print(f'Berhasil menghapus film "{movies[temp_id - 1].getTitle()}"!')
           movies.pop(temp_id - 1)
     elif choice == "5":
+      # Cari data spesifik. Pencarian dibuat berdasarkan atribut judul atau nama direktor
       temp_movies = []
       temp_str = input("Masukkan kata kunci pencarian : ")
       temp_str = temp_str.lower()
 
+      # Filter array, pastikan hanya film yang mengandung kata kunci pada judul atau nama direktornya yang 
+      # ditampilkan. Judul serta nama direktor dan kata kunci diubah ke lowercase sehingga pencarian menjadi
+      # case-insensitive
       for movie in movies:
         if(
           temp_str in movie.getTitle().lower()

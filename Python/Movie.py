@@ -1,11 +1,11 @@
 class Movie:
   def __init__(self, t, d, l, m, y, p):
-    self.__title = str(t)
-    self.__director = str(d)
-    self.__lang = str(l)
-    self.__minutes = int(m)
-    self.__year = int(y)
-    self.__price = int(p)
+    self.__title = str(t)    # Judul
+    self.__director = str(d) # Direktor
+    self.__lang = str(l)     # Bahasa
+    self.__minutes = int(m)  # Durasi
+    self.__year = int(y)     # Tahun rilis
+    self.__price = int(p)    # Harga tiket
 
   def setTitle(self, t):
     if not t:
