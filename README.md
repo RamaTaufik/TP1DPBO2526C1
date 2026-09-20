@@ -78,6 +78,6 @@ CINEMA ABSOLUT merupakan aplikasi yang mengelola data film. Tersedia dalam 2 *in
 | ![Before delete in CLI](documentations/delete_before-CLI.png) | ![Before delete in Web](documentations/delete_before-Web.png) |
 | ![After delete in CLI](documentations/delete_after-CLI.png) | ![After delete in Web](documentations/delete_after-Web.png) |
 
- 
- 
+ㅤ
+ㅤ
 <img src="documentations/_watermark.png" width="250px" align="right">
