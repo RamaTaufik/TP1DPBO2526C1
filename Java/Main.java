@@ -71,7 +71,7 @@ public class Main {
       printchar(maxLens[5] - intlen(ms.get(i).getYear()), ' ');
 
       System.out.print(" | Rp");
-      printchar(maxLens[6] - 2 - intlen(ms.get(i).getPrice()), ' '); // Dikurangi satu karena ada penambahan 'Rp'
+      printchar(maxLens[6] - 2 - intlen(ms.get(i).getPrice()), ' '); // Dikurangi dua karena ada penambahan 'Rp'
       System.out.println(ms.get(i).getPrice() + " |");
 
       printborder();
